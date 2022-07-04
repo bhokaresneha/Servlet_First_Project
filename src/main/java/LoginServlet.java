@@ -12,7 +12,7 @@ import java.io.PrintWriter;
         description = "Login Servlet Testing",
         urlPatterns = {"/LoginServlet"},
         initParams = {
-                @WebInitParam(name = "user", value = "sneha"),
+                @WebInitParam(name = "user", value = "Sneha"),
                 @WebInitParam(name = "password", value = "sneha")
         }
 )
@@ -25,17 +25,18 @@ public class LoginServlet extends HttpServlet {
         //get servlet config init params
         String userID=getServletConfig().getInitParameter("user");
         String password=getServletConfig().getInitParameter("password");
-        if (userID.equals(user) && password.equals(pwd)){
-            req.setAttribute("user",user);
-            req.getRequestDispatcher("LoginSuccess.jsp" ).forward(req,resp);
 
+        String nameValidate = "^[A-Z]{1}[A-Za-z]{2,}";
+        if(userID.equals(user) && userID.matches(nameValidate) && password.equals(pwd)) {
+            req.setAttribute("user",user);
+            req.getRequestDispatcher("LoginSuccess.jsp").forward(req, resp);
+        } else {
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/Login.html");
+            PrintWriter out  = resp.getWriter();
+            out.println("<font color = red> username is wrong</font>");
+            rd.include(req, resp);
         }
-        else {
-            RequestDispatcher rd=getServletContext().getRequestDispatcher("/Login.html");
-            PrintWriter out= resp.getWriter();
-            //out.println("<font color=red> Either User Name Or Password is Wrong </font> ");
-            rd.include(req,resp);
-        }
+
 
 
     }
