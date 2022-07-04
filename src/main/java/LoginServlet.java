@@ -33,7 +33,7 @@ public class LoginServlet extends HttpServlet {
         else {
             RequestDispatcher rd=getServletContext().getRequestDispatcher("/Login.html");
             PrintWriter out= resp.getWriter();
-            //out.println("<font color=red> Either User Name Or Password is Wrong </font> ");
+            out.println("<font color=red> Either User Name Or Password is Wrong </font> ");
             rd.include(req,resp);
         }
 
