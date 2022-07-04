@@ -14,6 +14,7 @@ import java.io.PrintWriter;
         initParams = {
                 @WebInitParam(name = "user", value = "Sneha"),
                 @WebInitParam(name = "password", value = "Sneha@123")
+
         }
 )
 public class LoginServlet extends HttpServlet {
