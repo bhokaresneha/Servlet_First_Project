@@ -37,7 +37,5 @@ public class LoginServlet extends HttpServlet {
             rd.include(req, resp);
         }
 
-
-
     }
 }
