@@ -13,7 +13,8 @@ import java.io.PrintWriter;
         urlPatterns = {"/LoginServlet"},
         initParams = {
                 @WebInitParam(name = "user", value = "Sneha"),
-                @WebInitParam(name = "password", value = "sneha")
+                @WebInitParam(name = "password", value = "Sneha@123")
+
         }
 )
 public class LoginServlet extends HttpServlet {
@@ -27,15 +28,20 @@ public class LoginServlet extends HttpServlet {
         String password=getServletConfig().getInitParameter("password");
 
         String nameValidate = "^[A-Z]{1}[A-Za-z]{2,}";
-        if(userID.equals(user) && userID.matches(nameValidate) && password.equals(pwd)) {
+
+        String passwordValidate = "^(?=.[0-9])(?=[^@#$%^&+=]{1}$)(?=.[a-z])(?=.*[A-Z]).{8,}$";
+
+        if(userID.equals(user) && userID.matches(nameValidate) && password.equals(pwd) && password.matches(passwordValidate)) {
             req.setAttribute("user",user);
             req.getRequestDispatcher("LoginSuccess.jsp").forward(req, resp);
         } else {
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/Login.html");
             PrintWriter out  = resp.getWriter();
-            out.println("<font color = red> username is wrong</font>");
+            out.println("<font color = red> Either username or password is wrong</font>");
             rd.include(req, resp);
         }
+
+
 
     }
 }
